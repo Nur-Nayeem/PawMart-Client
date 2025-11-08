@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "pet-and-supplies",
+        path: "pets-and-supplies",
         Component: PetsAndSupplies,
       },
     ],

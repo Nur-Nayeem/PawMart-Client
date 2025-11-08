@@ -4,11 +4,11 @@ import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="gradient-bg h-screen">
-      <header>
+    <div className="gradient-bg">
+      <header className="container mx-auto">
         <Navbar />
       </header>
-      <main>
+      <main className="container mx-auto mt-10">
         <Outlet />
       </main>
       <footer>Footer</footer>
