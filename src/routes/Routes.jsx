@@ -5,6 +5,7 @@ import PetsAndSupplies from "../pages/PetsAndSupplies";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddListing from "../pages/AddListing";
+import DetailsPage from "../pages/DetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "pet-and-supplies",
         Component: PetsAndSupplies,
+      },
+      {
+        path: "pet-and-supplies/:id",
+        Component: DetailsPage,
       },
       {
         path: "auth/login",

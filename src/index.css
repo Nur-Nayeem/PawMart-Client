@@ -36,6 +36,14 @@
   @apply shadow-[0_0_15px_2px_rgba(71,37,244,0.6)];
 }
 
+.glass-blur {
+  @apply bg-white/30 backdrop-blur-md border border-white/15 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)];
+}
+
+.glass-blur-dark {
+  @apply bg-[#19162e]/25 border border-white/10 shadow-[0_8px_32px_0_rgba(71,37,244,0.2)];
+}
+
 .gradient-bg {
   background-color: #f6f5f8;
   background-image: radial-gradient(
@@ -55,21 +63,7 @@
       hsla(278, 80%, 40%, 0.3) 0px,
       transparent 50%
     ),
-    radial-gradient(at 80% 10%, hsla(180, 80%, 40%, 0.3) 0px, transparent 50%),
-    radial-gradient(at 20% 80%, hsla(340, 80%, 50%, 0.3) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, hsla(210, 80%, 50%, 0.3) 0px, transparent 50%);
-}
-
-.glass-blur {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-}
-
-.glass-blur-dark {
-  background: rgba(25, 22, 46, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(71, 37, 244, 0.2);
+    radial-gradient(at 80% 10%, rgba(20, 184, 184, 0.3) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, rgba(230, 25, 93, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(25, 128, 230, 0.3) 0px, transparent 50%);
 }
