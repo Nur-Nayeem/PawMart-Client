@@ -1,8 +1,56 @@
-import React, { use } from "react";
-import { ThemeContext } from "../Contexts/Contexts";
+import React, { use, useState } from "react";
+import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const AddListing = () => {
+  const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
+  const axiosInstance = useAxios();
+  const [category, setCategory] = useState("");
+  const handleAddListing = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value.trim();
+    const price = e.target.price.value;
+    const location = e.target.location.value.trim();
+    const image = e.target.photourl.value.trim();
+    const date = e.target.date.value.trim();
+    const email = user?.email;
+    const description = e.target.description.value.trim();
+
+    const listingObject = {
+      name,
+      category,
+      price,
+      location,
+      image,
+      date,
+      email,
+      description,
+    };
+    console.log(listingObject);
+    axiosInstance
+      .post("/add-listing", listingObject)
+      .then((data) => {
+        // console.log(data);
+        if (data.data.insertedId) {
+          Swal.fire({
+            title: "Successfully added listing",
+            icon: "success",
+          });
+          e.target.reset();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err,
+        });
+      });
+  };
+
   return (
     <main className="flex-1 flex items-center justify-center">
       <div
@@ -16,7 +64,7 @@ const AddListing = () => {
         <p className="text-center dark:text-gray-200 text-gray-700 mb-6 sm:mb-8">
           Fill out the form below to post your pet or product.
         </p>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleAddListing}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
@@ -26,6 +74,7 @@ const AddListing = () => {
                 className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
                 placeholder="e.g., Golden Retriever Puppy"
                 type="text"
+                name="name"
               />
             </div>
             <div>
@@ -33,14 +82,16 @@ const AddListing = () => {
                 Category
               </label>
               <select
-                defaultValue="Pick a text editor"
+                defaultValue="Select a category"
                 className="select select-primary w-full px-4 h-12  rounded-lg border-2 border-primary/50 bg-base-100/50  outline-none focus:outline-none"
+                name="category"
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <option disabled={true}>Select a category</option>
-                <option>Pets</option>
-                <option>Food</option>
-                <option>Accessories</option>
-                <option>Care Products</option>
+                <option value={"Pets"}>Pets</option>
+                <option value={"Pet Food"}>Pet Food</option>
+                <option value={"Accessories"}>Accessories</option>
+                <option value={"Care Products"}>Care Products</option>
               </select>
             </div>
           </div>
@@ -51,26 +102,26 @@ const AddListing = () => {
               </label>
               <div className="relative mt-2">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                  $
+                  ৳
                 </span>
                 <input
                   className="w-full h-12 p-4 pl-8 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
                   placeholder="0.00"
                   type="number"
+                  name="price"
+                  disabled={category === "Pets"}
                 />
               </div>
             </div>
             <div>
-              <label
-                className="block text-sm font-semibold mb-2 dark:text-white text-secondary"
-                for="location"
-              >
+              <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
                 Location
               </label>
               <input
                 className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
                 placeholder="e.g., Dhaka, BD"
                 type="text"
+                name="location"
               />
             </div>
           </div>
@@ -82,33 +133,29 @@ const AddListing = () => {
               className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
               placeholder="https://example.com/image.jpg"
               type="url"
+              name="photourl"
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label
-                className="block text-sm font-semibold mb-2 dark:text-white text-secondary"
-                for="date"
-              >
+              <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
                 Date (Pick Up)
               </label>
               <input
                 className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
                 type="date"
+                name="date"
               />
             </div>
             <div>
-              <label
-                className="block text-sm font-semibold mb-2 dark:text-white text-secondary"
-                for="email"
-              >
+              <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
                 Email
               </label>
               <input
                 className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
-                readonly=""
+                readOnly
                 type="email"
-                value="user@pawmart.com"
+                value={user?.email}
               />
             </div>
           </div>
@@ -119,6 +166,7 @@ const AddListing = () => {
             <textarea
               className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none min-h-[120px]"
               placeholder="Provide a detailed description..."
+              name="description"
             ></textarea>
           </div>
           <div className="pt-4">

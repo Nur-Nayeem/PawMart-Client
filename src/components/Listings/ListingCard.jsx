@@ -10,19 +10,13 @@ const ListingCard = ({ list }) => {
     (category == "Pets" && "bg-[#8ad6c9] text-[#006251]") ||
     (category == "Pet Food" && "bg-[#C3B091] text-[#5d4a2a]") ||
     "bg-primary/70 text-gray-200";
-
   return (
     <div
       className={`flex flex-col rounded-xl ${
         theme == "light" ? "glass-blur" : "glass-blur-dark"
       } overflow-hidden shadow-sm hover:scale-103 transition-transform duration-300`}
     >
-      <img
-        alt="A fluffy white cat napping in a plush pet bed"
-        className="w-full h-52 object-cover"
-        src={image}
-        // src="./Plush_Pet_Bed.png"
-      />
+      <img src={image} alt={name} className="w-full h-52 object-cover" />
       <div className="p-4 flex flex-col grow gap-2">
         <div className="flex justify-between items-start">
           <h3 className=" dark:text-white text-secondary text-lg font-bold">
