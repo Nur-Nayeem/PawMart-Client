@@ -13,9 +13,9 @@ const CategorySection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
         <Link
           to={"/pets-and-supplies"}
-          className="flex flex-1 gap-3 rounded-xl bg-white/40 backdrop-blur-md border border-white/30 p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          className="flex flex-1 gap-3 rounded-xl glass-blur p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
         >
-          <div className="text-primary bg-white/50 rounded-full p-3">
+          <div className="text-white bg-linear-to-r from-blue-400 to-cyan-400 rounded-full p-3">
             <PiDog className="text-5xl" />
           </div>
           <div className="flex flex-col gap-1 mt-2">
@@ -29,9 +29,9 @@ const CategorySection = () => {
         </Link>
         <Link
           to={"/pets-and-supplies"}
-          className="flex flex-1 gap-3 rounded-xl bg-white/40 backdrop-blur-md border border-white/30 p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          className="flex flex-1 gap-3 rounded-xl glass-blur p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
         >
-          <div className="text-primary bg-white/50 rounded-full p-3">
+          <div className="text-white bg-linear-to-r from-orange-400 to-red-400 rounded-full p-3">
             <PiBowlFood className="text-5xl" />
           </div>
           <div className="flex flex-col gap-1 mt-2">
@@ -45,9 +45,9 @@ const CategorySection = () => {
         </Link>
         <Link
           to={"/pets-and-supplies"}
-          className="flex flex-1 gap-3 rounded-xl bg-white/40 backdrop-blur-md border border-white/30 p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          className="flex flex-1 gap-3 rounded-xl glass-blur p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
         >
-          <div className="text-primary bg-white/50 rounded-full p-3">
+          <div className="text-white bg-linear-to-l from-purple-400 to-pink-400 rounded-full p-3">
             <MdOutlineToys className="text-5xl" />
           </div>
           <div className="flex flex-col gap-1 mt-2">
@@ -61,9 +61,9 @@ const CategorySection = () => {
         </Link>
         <Link
           to={"/pets-and-supplies"}
-          className="flex flex-1 gap-3 rounded-xl bg-white/40 backdrop-blur-md border border-white/30 p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          className="flex flex-1 gap-3 rounded-xl glass-blur p-5 flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
         >
-          <div className="text-primary bg-white/50 rounded-full p-3">
+          <div className="text-white bg-linear-to-r from-green-400 to-emerald-400 rounded-full p-3">
             <MdOutlineHealthAndSafety className="text-5xl" />
           </div>
           <div className="flex flex-col gap-1 mt-2">
