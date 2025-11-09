@@ -2,19 +2,81 @@ import React, { use, useState } from "react";
 import { CiLink, CiLock, CiMail } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { IoPersonOutline } from "react-icons/io5";
+import { AuthContext } from "../Contexts/Contexts";
 
 const Register = () => {
+  const { signWithGoogle, createUser, updateUserProfile } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [error, setError] = useState(false);
   const [loadingReg, setLoadingReg] = useState(false);
   const [eye, setEye] = useState(false);
+  const navigate = useNavigate();
 
-  const handleRegister = () => {};
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    let photourl = e.target.photourl.value;
+    const password = e.target.password.value;
 
-  const handleGoogleSignIn = () => {};
+    const upperCaseRegEx = /[A-Z]/;
+
+    const LowerCaseRegEx = /[a-z]/;
+
+    if (name.length < 3) {
+      setError("Userame must have at least 3 latter");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password Length must be at least 6 character");
+      return;
+    }
+    if (!LowerCaseRegEx.test(password)) {
+      setError("Must have a Lowercase letter in the password");
+      return;
+    }
+    if (!upperCaseRegEx.test(password)) {
+      setError("Must have an Uppercase letter in the password");
+      return;
+    }
+
+    setLoadingReg(true);
+    createUser(email, password)
+      .then(() => {
+        updateUserProfile(name, photourl)
+          .then(() => {
+            navigate("/");
+            console.log("Registration Succenfull");
+            setLoadingReg(false);
+            e.target.reset();
+          })
+          .catch((err) => {
+            console.log(err.message);
+            setLoadingReg(false);
+          });
+      })
+      .catch(() => {
+        console.log("Registration Faild! Try again later");
+        setError("Registration Faild! Try again later");
+        setLoadingReg(false);
+      });
+    setError("");
+  };
+
+  const handleGoogleSignIn = () => {
+    setError("");
+    signWithGoogle()
+      .then(() => {
+        navigate("/");
+        console.log("Successfully SignIn with google");
+      })
+      .catch(() => {
+        console.log("SignIn Faild! try again");
+      });
+  };
   return (
     <div className="my-container flex items-center justify-center">
       <title>PawsMart - SignUp</title>
@@ -112,7 +174,7 @@ const Register = () => {
             {loadingReg ? (
               <span className="loading loading-spinner loading-xl text-base-100"></span>
             ) : (
-              <span>Login</span>
+              <span>Register</span>
             )}
           </button>
         </form>

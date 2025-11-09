@@ -7,14 +7,52 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { AuthContext } from "../Contexts/Contexts";
 
 const Login = () => {
-  const { user, signWithGoogle } = use(AuthContext);
+  const { signWithGoogle, loginUser } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [error, setError] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [eye, setEye] = useState(false);
 
   const navigate = useNavigate();
-  const handleLogin = () => {};
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const upperCaseRegEx = /[A-Z]/;
+
+    const LowerCaseRegEx = /[a-z]/;
+
+    if (password.length < 6) {
+      setError("Password Length must be at least 6 character");
+      return;
+    }
+    if (!LowerCaseRegEx.test(password)) {
+      setError("Must have a Lowercase letter in the password");
+      return;
+    }
+    if (!upperCaseRegEx.test(password)) {
+      setError("Must have an Uppercase letter in the password");
+      return;
+    }
+    setLoadingLogin(true);
+
+    loginUser(email, password)
+      .then(() => {
+        navigate(location.state || "/");
+        console.log("Login Succenfull");
+        e.target.reset();
+        setLoadingLogin(false);
+      })
+      .catch(() => {
+        console.log("Login Faild! Your Email or password is wrong.");
+        setError("Login Faild! Your Email or password is wrong.");
+        setLoadingLogin(false);
+      });
+    setError("");
+    setLoadingLogin(false);
+  };
 
   const handleGoogleSignIn = () => {
     setError("");
