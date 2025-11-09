@@ -1,10 +1,12 @@
-import React from "react";
+import React, { use } from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const MainLayout = () => {
+  const { theme } = use(ThemeContext);
   return (
-    <div className="gradient-bg">
+    <div className={theme == "light" ? "gradient-bg" : "gradient-bg-dark"}>
       <header className="fixed top-2 w-full z-50">
         <nav className="container mx-auto">
           <Navbar />

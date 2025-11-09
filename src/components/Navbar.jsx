@@ -1,10 +1,26 @@
-import React from "react";
+import React, { use, useEffect } from "react";
 import { IoMenu } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navbar = () => {
+  const { theme, setTheme } = use(ThemeContext);
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
   return (
-    <div className="glass-blur rounded-2xl flex justify-between items-center py-4 px-2.5 md:px-10">
+    <div
+      className={` ${
+        theme == "light" ? "glass-blur" : "glass-blur-dark"
+      } rounded-2xl flex justify-between items-center py-4 px-2.5 md:px-10`}
+    >
       <div className="flex justify-center items-center gap-2">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="lg:hidden cursor-pointer">
@@ -52,6 +68,13 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="flex items-center gap-2.5">
+        <input
+          onChange={(e) => handleTheme(e.target.checked)}
+          type="checkbox"
+          defaultChecked={localStorage.getItem("theme") === "dark"}
+          className="toggle"
+        />
+
         <Link
           to={"/login"}
           className="hidden sm:block shadow-glow hover:scale-105 transition-transform duration-300 py-2 px-4 rounded-full font-bold cursor-pointer "

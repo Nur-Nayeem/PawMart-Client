@@ -1,12 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
   --color-primary: #9f62f2;
-  --color-secondary: #001931;
+  --color-secondary: #362920;
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 * {
   font-family: "Inter", sans-serif;
@@ -19,7 +25,7 @@
 }
 
 .btn-primary {
-  @apply bg-linear-to-r from-[#632EE3] to-[#9F62F2] text-base-100 border-0;
+  @apply bg-linear-to-r from-[#632EE3] to-[#9F62F2] border-0;
 }
 
 .active {
@@ -42,10 +48,28 @@
     radial-gradient(at 80% 80%, rgba(117, 179, 240, 0.3) 0px, transparent 50%);
 }
 
+.gradient-bg-dark {
+  background-color: #131022;
+  background-image: radial-gradient(
+      at 20% 10%,
+      hsla(278, 80%, 40%, 0.3) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 80% 10%, hsla(180, 80%, 40%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, hsla(340, 80%, 50%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsla(210, 80%, 50%, 0.3) 0px, transparent 50%);
+}
+
 .glass-blur {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.glass-blur-dark {
+  background: rgba(25, 22, 46, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(71, 37, 244, 0.2);
 }
