@@ -2,6 +2,7 @@ import React, { use } from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import { ThemeContext } from "../contexts/ThemeContext";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
   const { theme } = use(ThemeContext);
@@ -15,7 +16,9 @@ const MainLayout = () => {
       <main className="container mx-auto pt-30">
         <Outlet />
       </main>
-      <footer>Footer</footer>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };
