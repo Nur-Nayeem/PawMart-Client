@@ -2,17 +2,32 @@ import React, { use, useState } from "react";
 import { CiLock, CiMail } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { AuthContext } from "../Contexts/Contexts";
 
 const Login = () => {
+  const { user, signWithGoogle } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [error, setError] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [eye, setEye] = useState(false);
+
+  const navigate = useNavigate();
   const handleLogin = () => {};
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = () => {
+    setError("");
+    signWithGoogle()
+      .then(() => {
+        navigate("/");
+        console.log("Successfully SignIn with google");
+      })
+      .catch(() => {
+        console.log("SignIn Faild! try again");
+      });
+  };
+
   return (
     <div className="py-16 my-container flex items-center justify-center">
       <title>PawsMart - SignIn</title>
