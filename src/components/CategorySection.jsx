@@ -2,7 +2,7 @@ import React, { use } from "react";
 import { MdOutlineHealthAndSafety, MdOutlineToys } from "react-icons/md";
 import { PiBowlFood, PiDog } from "react-icons/pi";
 import { Link } from "react-router";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../Contexts/Contexts";
 
 const CategorySection = () => {
   const { theme } = use(ThemeContext);

@@ -3,8 +3,7 @@ import { CiLock, CiMail } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { AuthContext } from "../Contexts/Contexts";
+import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 
 const Login = () => {
   const { signWithGoogle, loginUser } = use(AuthContext);

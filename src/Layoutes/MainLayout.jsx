@@ -1,8 +1,8 @@
 import React, { use } from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
-import { ThemeContext } from "../contexts/ThemeContext";
 import Footer from "../components/Footer";
+import { ThemeContext } from "../Contexts/Contexts";
 
 const MainLayout = () => {
   const { theme } = use(ThemeContext);

@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "../../Contexts/Contexts";
 
 const OurHeros = () => {
   const { theme } = use(ThemeContext);

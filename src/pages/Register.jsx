@@ -3,9 +3,8 @@ import { CiLink, CiLock, CiMail } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
-import { ThemeContext } from "../contexts/ThemeContext";
 import { IoPersonOutline } from "react-icons/io5";
-import { AuthContext } from "../Contexts/Contexts";
+import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 
 const Register = () => {
   const { signWithGoogle, createUser, updateUserProfile } = use(AuthContext);

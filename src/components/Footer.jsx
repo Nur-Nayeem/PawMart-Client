@@ -2,7 +2,7 @@ import React, { use } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../Contexts/Contexts";
 
 const Footer = () => {
   const { theme } = use(ThemeContext);

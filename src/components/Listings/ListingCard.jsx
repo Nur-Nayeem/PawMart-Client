@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { CiLocationOn } from "react-icons/ci";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "../../Contexts/Contexts";
 
 const ListingCard = ({ category = "food" }) => {
   const { theme } = use(ThemeContext);

@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import { GoVerified } from "react-icons/go";
 import { MdFavoriteBorder, MdGroups } from "react-icons/md";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "../../Contexts/Contexts";
 
 const WhyAdopt = () => {
   const { theme } = use(ThemeContext);
