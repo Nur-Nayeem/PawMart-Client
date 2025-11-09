@@ -32,7 +32,7 @@ const DetailsPage = () => {
                 </span>
               </div>
             </div>
-            <div className="text-4xl lg:text-5xl font-bold text-primary text-glow">
+            <div className="text-4xl lg:text-5xl font-bold gradient-text text-glow">
               $800
             </div>
             <div className="space-y-3 pt-2">
