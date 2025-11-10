@@ -17,7 +17,14 @@ const ListingCard = ({ list }) => {
         theme == "light" ? "glass-blur" : "glass-blur-dark"
       } overflow-hidden shadow-sm hover:scale-103 transition-transform duration-300`}
     >
-      <img src={image || "/fallback.png"} alt={name} className="w-full h-52" />
+      <img
+        src={image || "/fallback.png"}
+        alt={name}
+        className="w-full h-52"
+        onError={(e) => {
+          e.currentTarget.src = "/fallback.png";
+        }}
+      />
       <div className="p-4 flex flex-col grow gap-2">
         <div className="flex justify-between items-start">
           <h3 className=" dark:text-white text-secondary text-lg font-bold">

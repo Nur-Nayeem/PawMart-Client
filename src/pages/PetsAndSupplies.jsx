@@ -1,14 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
 import ListingCard from "../components/Listings/ListingCard";
 import useAxios from "../hooks/useAxios";
+import Loading from "../components/Loading";
 
 const PetsAndSupplies = () => {
   const axiosInstance = useAxios();
   const [listings, setListings] = useState([]);
+  const [category, setCategory] = useState("Select a category");
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
   useEffect(() => {
-    axiosInstance.get("/listings").then((data) => setListings(data.data));
-  }, [axiosInstance]);
+    setLoading(true);
+    axiosInstance
+      .get(
+        `/listings?category=${category == "Select a category" ? "" : category}`
+      )
+      .then((data) => {
+        setListings(data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [axiosInstance, category]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    axiosInstance
+      .get(`/search-listings?search=${search}`)
+      .then((data) => {
+        setListings(data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <div className="text-center">
@@ -21,7 +51,10 @@ const PetsAndSupplies = () => {
         </p>
       </div>
       <div className="flex flex-col md:flex-row gap-4 mt-6">
-        <div className="flex-1 flex items-center gap-1.5">
+        <form
+          onSubmit={handleSearch}
+          className="flex-1 flex items-center gap-1.5"
+        >
           <label className="input px-4 h-12  rounded-full border-2 border-primary/50 bg-base-100/50  outline-none focus:outline-none">
             <svg
               className="h-[1em] opacity-50"
@@ -39,30 +72,42 @@ const PetsAndSupplies = () => {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search" />
+            <input
+              type="search"
+              required
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </label>
           <button className="btn-primary py-3 px-5 rounded-full cursor-pointer text-white">
             Search
           </button>
-        </div>
+        </form>
+
         <div className="relative w-full md:w-56">
           <select
-            defaultValue="Select a category"
+            defaultValue={category}
             className="select select-primary w-full px-4 h-12  rounded-full border-2 border-primary/50 bg-base-100/50  outline-none focus:outline-none"
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option disabled={true}>Select a category</option>
             <option>Pets</option>
-            <option>Food</option>
+            <option>Pet Food</option>
             <option>Accessories</option>
-            <option>Care Products</option>
+            <option>Pet Care Products</option>
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
-        {listings.map((list, index) => (
-          <ListingCard key={index} list={list} />
-        ))}
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
+          {listings.map((list, index) => (
+            <ListingCard key={index} list={list} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

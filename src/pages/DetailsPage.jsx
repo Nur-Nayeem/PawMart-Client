@@ -27,6 +27,9 @@ const DetailsPage = () => {
               alt={details.name}
               className="absolute inset-0 w-full h-full object-cover"
               src={details.image || "/fallback.png"}
+              onError={(e) => {
+                e.currentTarget.src = "/fallback.png";
+              }}
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent md:bg-linear-to-r md:from-black/10"></div>
           </div>

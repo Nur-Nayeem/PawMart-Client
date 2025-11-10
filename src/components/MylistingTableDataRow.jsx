@@ -47,7 +47,13 @@ const MylistingTableDataRow = ({ row, setRefetch, refetch }) => {
         <td className="p-4 font-medium">
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
-              <img src={row.image || "/fallback.png"} alt={row.name} />
+              <img
+                src={row.image || "/fallback.png"}
+                alt={row.name}
+                onError={(e) => {
+                  e.currentTarget.src = "/fallback.png";
+                }}
+              />
             </div>
           </div>
         </td>

@@ -94,6 +94,9 @@ const OrderForm = () => {
                   alt="Golden Retriever Puppy"
                   className="w-full h-auto object-cover rounded-lg aspect-4/3"
                   src={listing.image || "/fallback.png"}
+                  onError={(e) => {
+                    e.currentTarget.src = "/fallback.png";
+                  }}
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
