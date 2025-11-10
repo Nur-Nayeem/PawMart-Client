@@ -8,6 +8,7 @@ import AddListing from "../pages/AddListing";
 import DetailsPage from "../pages/DetailsPage";
 import OrderForm from "../pages/OrderForm";
 import MyListings from "../pages/MyListings";
+import UpdateListing from "../pages/UpdateMyListing";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/my-listings",
         Component: MyListings,
+      },
+      {
+        path: "/my-listings/update/:id",
+        Component: UpdateListing,
       },
       {
         path: "auth/login",

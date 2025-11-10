@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../Contexts/Contexts";
-import MylistingTableDataRow from "../components/MylistingTableDataRaw";
+import MylistingTableDataRow from "../components/MylistingTableDataRow";
 
 const MyListings = () => {
   const [myListings, setMyListings] = useState([]);
