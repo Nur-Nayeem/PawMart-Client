@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddListing from "../pages/AddListing";
 import DetailsPage from "../pages/DetailsPage";
-
+import OrderForm from "../pages/OrderForm";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "pet-and-supplies/:id",
         Component: DetailsPage,
+      },
+      {
+        path: "pet-and-supplies/:id/order",
+        Component: OrderForm,
       },
       {
         path: "auth/login",

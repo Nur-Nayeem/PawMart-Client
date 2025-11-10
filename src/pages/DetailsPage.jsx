@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { CiLocationOn, CiMail } from "react-icons/ci";
 import useAxios from "../hooks/useAxios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const DetailsPage = () => {
-  const { theme } = useState();
   const axiosInstance = useAxios();
   const { id } = useParams();
   const [details, setDetails] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
@@ -19,17 +19,14 @@ const DetailsPage = () => {
   return (
     <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div
-        className={`w-full max-w-5xl mx-auto ${
-          theme == "light" ? "glass-blur" : "glass-blur-dark"
-        } rounded-xl shadow-2xl shadow-black/50 overflow-hidden`}
+        className={`w-full max-w-5xl mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden`}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative w-full aspect-square md:aspect-auto">
             <img
-              alt="Golden Retriever Puppy looking at the camera"
+              alt={details.name}
               className="absolute inset-0 w-full h-full object-cover"
               src={details.image}
-              // src="https://i.ibb.co.com/xt5f6BZb/max-puppy.png"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent md:bg-linear-to-r md:from-black/10"></div>
           </div>
@@ -65,7 +62,10 @@ const DetailsPage = () => {
             </div>
 
             <div className="pt-6">
-              <button className="w-full btn-primary shadow-glow hover:scale-105 transition-transform duration-300 text-white py-3 px-4 rounded-full font-bold cursor-pointer ">
+              <button
+                onClick={() => navigate(`/pet-and-supplies/${id}/order`)}
+                className="w-full btn-primary shadow-glow hover:scale-105 transition-transform duration-300 text-white py-3 px-4 rounded-full font-bold cursor-pointer "
+              >
                 Adopt Now
               </button>
             </div>

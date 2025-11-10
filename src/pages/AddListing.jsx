@@ -11,7 +11,7 @@ const AddListing = () => {
   const handleAddListing = (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim();
-    const price = e.target.price.value;
+    const price = parseInt(e.target.price.value) || 0;
     const location = e.target.location.value.trim();
     const image = e.target.photourl.value.trim();
     const date = e.target.date.value.trim();
