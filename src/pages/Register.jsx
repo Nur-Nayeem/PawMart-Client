@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { IoPersonOutline } from "react-icons/io5";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { signWithGoogle, createUser, updateUserProfile } = use(AuthContext);
@@ -48,19 +49,32 @@ const Register = () => {
         updateUserProfile(name, photourl)
           .then(() => {
             navigate("/");
-            console.log("Registration Succenfull");
             setLoadingReg(false);
+            Swal.fire({
+              title: "Registration Succenfull",
+              icon: "success",
+              draggable: true,
+            });
             e.target.reset();
           })
           .catch((err) => {
-            console.log(err.message);
             setLoadingReg(false);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.message,
+            });
           });
       })
-      .catch(() => {
+      .catch((error) => {
         console.log("Registration Faild! Try again later");
         setError("Registration Faild! Try again later");
         setLoadingReg(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
       });
     setError("");
   };
@@ -70,10 +84,18 @@ const Register = () => {
     signWithGoogle()
       .then(() => {
         navigate("/");
-        console.log("Successfully SignIn with google");
+        Swal.fire({
+          title: "Successfully SignIn with google",
+          icon: "success",
+          draggable: true,
+        });
       })
-      .catch(() => {
-        console.log("SignIn Faild! try again");
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
       });
   };
   return (

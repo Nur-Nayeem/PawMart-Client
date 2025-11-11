@@ -4,6 +4,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signWithGoogle, loginUser } = use(AuthContext);
@@ -40,17 +41,24 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         navigate(location.state || "/");
-        console.log("Login Succenfull");
         e.target.reset();
         setLoadingLogin(false);
+        Swal.fire({
+          title: "Login Succenfull",
+          icon: "success",
+          draggable: true,
+        });
       })
-      .catch(() => {
-        console.log("Login Faild! Your Email or password is wrong.");
+      .catch((err) => {
         setError("Login Faild! Your Email or password is wrong.");
         setLoadingLogin(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
       });
     setError("");
-    setLoadingLogin(false);
   };
 
   const handleGoogleSignIn = () => {
@@ -58,10 +66,18 @@ const Login = () => {
     signWithGoogle()
       .then(() => {
         navigate("/");
-        console.log("Successfully SignIn with google");
+        Swal.fire({
+          title: "Successfully SignIn with google",
+          icon: "success",
+          draggable: true,
+        });
       })
-      .catch(() => {
-        console.log("SignIn Faild! try again");
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
       });
   };
 
