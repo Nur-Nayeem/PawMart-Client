@@ -148,6 +148,7 @@ const AddListing = () => {
                 className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
                 type="date"
                 name="date"
+                required
               />
             </div>
             <div>

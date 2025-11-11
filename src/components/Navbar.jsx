@@ -3,6 +3,7 @@ import { IoLogOut, IoMenu } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 import Swal from "sweetalert2";
+import { Typewriter } from "react-simple-typewriter";
 
 const Navbar = () => {
   const { user, logOutUSer } = use(AuthContext);
@@ -36,7 +37,7 @@ const Navbar = () => {
 
   return (
     <div className={`${theme == "light" ? "glass-blur" : "glass-blur-dark"} `}>
-      <div className="rounded-2xl flex justify-between items-center py-4 px-2.5 md:px-10 container mx-auto  ">
+      <div className="rounded-2xl flex justify-between items-center py-4 px-2.5 md:px-0 container mx-auto  ">
         <div className="flex justify-center items-center gap-2">
           <div className="dropdown">
             <div
@@ -91,9 +92,19 @@ const Navbar = () => {
           </div>
           <Link
             to={"/"}
-            className="text-xl font-bold flex items-center gap-1.5"
+            className="text-xl font-bold flex items-center gap-1.5 w-[146px]"
           >
-            <span className="text-2xl gradient-text">PawsMart</span>
+            <span className="text-2xl gradient-text">
+              <Typewriter
+                words={["PawsMart"]}
+                loop={Infinity}
+                cursor
+                cursorStyle="_"
+                typeSpeed={100}
+                deleteSpeed={70}
+                delaySpeed={2000}
+              />
+            </span>
             <img src="/pawprint.png" alt="logo-icon" className="w-6 h-6" />
           </Link>
         </div>

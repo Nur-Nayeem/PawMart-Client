@@ -85,15 +85,15 @@ const PetsAndSupplies = () => {
 
       <div>
         <div className="text-center">
-          <h2 className="text-3xl sm:text-5xl font-bold text-center mb-10">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center m-5">
             Brows Pets & Supplies
           </h2>
-          <p>
+          <p className="dark:text-gray-200 text-gray-700 text-lg">
             Find your new best friend or the best supplies for them on PawMart,
             the premier portal for pet adoption and products.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-4 mt-6">
+        <div className="flex flex-col md:flex-row gap-4 mt-6 mb-3">
           <form
             onSubmit={handleSearch}
             className="flex-1 flex items-center gap-1.5"
@@ -152,7 +152,7 @@ const PetsAndSupplies = () => {
             <h2 className="text-2xl font-medium">No Listings Found!</h2>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
             {listings.map((list, index) => (
               <ListingCard key={index} list={list} />
             ))}

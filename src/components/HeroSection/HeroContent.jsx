@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const HeroContent = ({ slide }) => {
   return (
@@ -7,9 +8,12 @@ const HeroContent = ({ slide }) => {
         {slide.title}
       </h2>
       <p className="text-lg text-center my-6">{slide.des}</p>
-      <button className="btn-primary font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-4xl cursor-pointer hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-lg">
+      <Link
+        to={"/category-filtered-product?category=Pets"}
+        className="btn-primary font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-4xl cursor-pointer hover:bg-primary hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-lg"
+      >
         Adopt Now
-      </button>
+      </Link>
     </>
   );
 };

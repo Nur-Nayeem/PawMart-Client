@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiLocationOn, CiMail } from "react-icons/ci";
 import useAxios from "../hooks/useAxios";
 import { useNavigate, useParams } from "react-router";
+import { CgClose } from "react-icons/cg";
 
 const DetailsPage = () => {
   const axiosInstance = useAxios();
@@ -19,8 +20,17 @@ const DetailsPage = () => {
   return (
     <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div
-        className={`w-full max-w-5xl mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden`}
+        className={`w-full max-w-5xl mx-auto rounded-xl shadow-2xl shadow-black/50 overflow-hidden relative`}
       >
+        <button
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors"
+          type="button"
+        >
+          <CgClose
+            onClick={() => navigate(-1)}
+            className="text-xl cursor-pointer"
+          />
+        </button>
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative w-full aspect-square md:aspect-auto">
             <img
