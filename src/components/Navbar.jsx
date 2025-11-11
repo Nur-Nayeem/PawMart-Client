@@ -51,7 +51,9 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="dropdown-content flex flex-col gap-2.5 gradient-bg rounded-box z-10 mt-7 w-52 p-4 shadow cursor-pointer"
+            className={`dropdown-content flex flex-col gap-2.5 ${
+              theme == "light" ? "gradient-bg" : "gradient-bg-dark"
+            } rounded-box z-10 mt-7 w-52 p-4 shadow cursor-pointer`}
           >
             <NavLink
               to={"/"}

@@ -1,13 +1,15 @@
 import React, { use, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
-import { AuthContext } from "../Contexts/Contexts";
+import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 import MyOrdersTableRow from "../components/MyOredersTableRow";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
+import Swal from "sweetalert2";
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const axiosInstance = useAxios();
   const { user } = use(AuthContext);
+  const { theme } = use(ThemeContext);
   useEffect(() => {
     axiosInstance
       .get(`/order?email=${user?.email}`)
@@ -22,7 +24,6 @@ const MyOrders = () => {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-
     doc.setFontSize(18);
     doc.text("My Orders Report", doc.internal.pageSize.getWidth() / 2, 20, {
       align: "center",
@@ -51,8 +52,6 @@ const MyOrders = () => {
       row.date || "",
       row.phone || "",
     ]);
-
-    // ✅ Generate the table
     autoTable(doc, {
       startY: 30,
       head,
@@ -63,6 +62,11 @@ const MyOrders = () => {
       styles: { fontSize: 10, cellPadding: 3 },
     });
     doc.save("MyOrdersReport.pdf");
+    Swal.fire({
+      title: "Drag me!",
+      icon: "success",
+      draggable: true,
+    });
   };
 
   return (
@@ -72,53 +76,66 @@ const MyOrders = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-secondary dark:text-white">
             My Orders
           </h1>
-          <button
-            onClick={handleDownloadPDF}
-            className="btn-primary shadow-glow hover:scale-105 transition-transform duration-300 text-white py-2 px-4 rounded-full font-bold cursor-pointer "
+          {myOrders.length > 0 && (
+            <button
+              onClick={handleDownloadPDF}
+              className="btn-primary shadow-glow hover:scale-105 transition-transform duration-300 text-white py-2 px-4 rounded-full font-bold cursor-pointer "
+            >
+              Download Report
+            </button>
+          )}
+        </div>
+
+        {myOrders.length < 1 ? (
+          <div
+            className={`${
+              theme == "light" ? "glass-blur" : "glass-blur-dark"
+            } py-6 text-center rounded-xl`}
           >
-            Download Report
-          </button>
-        </div>
-        <div className="w-full overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="bg-white/40 border-white/60 dark:bg-white/10 backdrop-blur-md border-b dark:border-white/20">
-              <tr>
-                <th className="p-4 text-sm font-semibold dark:text-white/80 rounded-tl-lg">
-                  ListingId
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Image
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Product/Listing Name
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Buyer Name
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Price
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Quantity
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Address
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80">
-                  Date
-                </th>
-                <th className="p-4 text-sm font-semibold dark:text-white/80 rounded-tr-lg">
-                  Phone
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {myOrders.map((row, index) => (
-                <MyOrdersTableRow key={index} row={row} />
-              ))}
-            </tbody>
-          </table>
-        </div>
+            <h2 className="text-2xl font-medium">You Don't have any orders!</h2>
+          </div>
+        ) : (
+          <div className="w-full overflow-x-auto">
+            <table className="w-full text-left">
+              <thead className="bg-white/40 border-white/60 dark:bg-white/10 backdrop-blur-md border-b dark:border-white/20">
+                <tr>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80 rounded-tl-lg">
+                    ListingId
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Image
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Product/Listing Name
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Buyer Name
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Price
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Quantity
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Address
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80">
+                    Date
+                  </th>
+                  <th className="p-4 text-sm font-semibold dark:text-white/80 rounded-tr-lg">
+                    Phone
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {myOrders.map((row, index) => (
+                  <MyOrdersTableRow key={index} row={row} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </section>
   );
