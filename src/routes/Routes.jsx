@@ -11,6 +11,7 @@ import MyListings from "../pages/MyListings";
 import UpdateListing from "../pages/UpdateMyListing";
 import MyOrders from "../pages/MyOrders";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
+import NotFoundPage from "../pages/NotFoundPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -85,5 +86,9 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: "*",
+    Component: NotFoundPage,
   },
 ]);

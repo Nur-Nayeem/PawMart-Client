@@ -2,11 +2,12 @@ import React, { use, useEffect, useState } from "react";
 import ListingCard from "../components/Listings/ListingCard";
 import useAxios from "../hooks/useAxios";
 import Loading from "../components/Loading";
-import { CetegoryContext } from "../Contexts/Contexts";
+import { CetegoryContext, ThemeContext } from "../Contexts/Contexts";
 import { useNavigate, useParams } from "react-router";
 
 const PetsAndSupplies = () => {
   const axiosInstance = useAxios();
+  const { theme } = use(ThemeContext);
   const { category, setCategory } = use(CetegoryContext);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ const PetsAndSupplies = () => {
           onSubmit={handleSearch}
           className="flex-1 flex items-center gap-1.5"
         >
-          <label className="input px-4 h-12  rounded-full border-2 border-primary/50 bg-base-100/50  outline-none focus:outline-none">
+          <label className="input px-4 h-12  rounded-full border-2 border-primary/50 bg-base-100/50  outline-none focus:outline-none w-full sm:w-max">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +104,7 @@ const PetsAndSupplies = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </label>
-          <button className="btn-primary py-3 px-5 rounded-full cursor-pointer text-white">
+          <button className="btn-primary py-2.5 px-5 rounded-full cursor-pointer text-white">
             Search
           </button>
         </form>
@@ -124,6 +125,14 @@ const PetsAndSupplies = () => {
       </div>
       {loading ? (
         <Loading />
+      ) : listings.length < 1 ? (
+        <div
+          className={`${
+            theme == "light" ? "glass-blur" : "glass-blur-dark"
+          } py-6 text-center rounded-xl my-5`}
+        >
+          <h2 className="text-2xl font-medium">No Listings Found!</h2>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
           {listings.map((list, index) => (
