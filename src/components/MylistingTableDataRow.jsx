@@ -1,14 +1,14 @@
 import React from "react";
 import { MdDeleteOutline, MdModeEditOutline } from "react-icons/md";
 import { useNavigate } from "react-router";
-import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MylistingTableDataRow = ({ row, setRefetch, refetch }) => {
   const navigate = useNavigate();
-  const axiosInstance = useAxios();
+  const axiosSecureInstance = useAxiosSecure();
   const handleDeleteListing = () => {
-    axiosInstance
+    axiosSecureInstance
       .delete(`/listings/${row._id}`)
       .then(() => {
         Swal.fire({

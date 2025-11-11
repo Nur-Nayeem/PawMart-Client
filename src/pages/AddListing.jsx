@@ -1,13 +1,13 @@
 import React, { use, useState } from "react";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
-import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddListing = () => {
   const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
-  const axiosInstance = useAxios();
+  const axiosISecurenstance = useAxiosSecure();
   const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const handleAddListing = (e) => {
@@ -31,7 +31,7 @@ const AddListing = () => {
       description,
     };
     console.log(listingObject);
-    axiosInstance
+    axiosISecurenstance
       .post("/add-listing", listingObject)
       .then((data) => {
         // console.log(data);

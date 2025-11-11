@@ -1,20 +1,20 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
-import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const UpdateListing = () => {
   const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const navigate = useNavigate();
   const { id } = useParams();
-  const axiosInstance = useAxios();
+  const axiosSecureInstance = useAxiosSecure();
   const [category, setCategory] = useState("");
   const [listing, setListing] = useState({});
 
   useEffect(() => {
-    axiosInstance
+    axiosSecureInstance
       .get(`listings/${id}`)
       .then((data) => {
         setListing(data.data);
@@ -23,7 +23,7 @@ const UpdateListing = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [axiosInstance, id, listing.category]);
+  }, [axiosSecureInstance, id, listing.category]);
 
   const handleUpdateListing = (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ const UpdateListing = () => {
       date,
       description,
     };
-    axiosInstance
+    axiosSecureInstance
       .patch(`/update-listing/${id}`, updatelistingObject)
       .then(() => {
         Swal.fire({

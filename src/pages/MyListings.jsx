@@ -1,25 +1,24 @@
 import React, { use, useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
 import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 import MylistingTableDataRow from "../components/MylistingTableDataRow";
 import { Link } from "react-router";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyListings = () => {
   const [myListings, setMyListings] = useState([]);
-  const axiosInstance = useAxios();
+  const AxiosSecureInstance = useAxiosSecure();
   const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [refetch, setRefetch] = useState(false);
   useEffect(() => {
-    axiosInstance
-      .get(`/my-listings?email=${user?.email}`)
+    AxiosSecureInstance.get(`/my-listings?email=${user?.email}`)
       .then((data) => {
         setMyListings(data.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [axiosInstance, user?.email, refetch]);
+  }, [AxiosSecureInstance, user?.email, refetch]);
   console.log(myListings);
 
   return (
