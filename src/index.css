@@ -12,6 +12,13 @@
   --color-secondary: #362920;
 }
 
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  --color-primary: #9f62f2;
+  --color-secondary: #362920;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 * {
@@ -55,13 +62,5 @@
 }
 
 .gradient-bg-dark {
-  background-color: #131022;
-  background-image: radial-gradient(
-      at 20% 10%,
-      hsla(278, 80%, 40%, 0.3) 0px,
-      transparent 50%
-    ),
-    radial-gradient(at 80% 10%, rgba(20, 184, 184, 0.3) 0px, transparent 50%),
-    radial-gradient(at 20% 80%, rgba(230, 25, 93, 0.3) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(25, 128, 230, 0.3) 0px, transparent 50%);
+  @apply bg-linear-to-br from-slate-900 via-slate-800 to-sky-950;
 }
