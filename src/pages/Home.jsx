@@ -8,7 +8,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import { motion, useScroll } from "motion/react";
 const recentListingPromise = axios
-  .get("http://localhost:4000/recent-listings")
+  .get("https://paws-mart-server.vercel.app/recent-listings")
   .then((data) => data.data);
 
 const Home = () => {

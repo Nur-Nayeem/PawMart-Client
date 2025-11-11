@@ -3,6 +3,7 @@ import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 import MylistingTableDataRow from "../components/MylistingTableDataRow";
 import { Link } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "../components/Loading";
 
 const MyListings = () => {
   const [myListings, setMyListings] = useState([]);
@@ -10,13 +11,18 @@ const MyListings = () => {
   const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [refetch, setRefetch] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     AxiosSecureInstance.get(`/my-listings?email=${user?.email}`)
       .then((data) => {
         setMyListings(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, [AxiosSecureInstance, user?.email, refetch]);
   console.log(myListings);
@@ -37,15 +43,19 @@ const MyListings = () => {
         </div>
 
         {myListings.length < 1 ? (
-          <div
-            className={`${
-              theme == "light" ? "glass-blur" : "glass-blur-dark"
-            } py-6 text-center rounded-xl`}
-          >
-            <h2 className="text-2xl font-medium">
-              You Don't have any Listings!
-            </h2>
-          </div>
+          loading ? (
+            <Loading />
+          ) : (
+            <div
+              className={`${
+                theme == "light" ? "glass-blur" : "glass-blur-dark"
+              } py-6 text-center rounded-xl`}
+            >
+              <h2 className="text-2xl font-medium">
+                You Don't have any Listings!
+              </h2>
+            </div>
+          )
         ) : (
           <div className="w-full overflow-x-auto">
             <table className="w-full text-left">

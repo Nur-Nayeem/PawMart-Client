@@ -3,7 +3,7 @@ import { use, useEffect } from "react";
 import { AuthContext } from "../Contexts/Contexts";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://paws-mart-server.vercel.app",
 });
 
 const useAxiosSecure = () => {

@@ -221,9 +221,9 @@ const Navbar = () => {
                   theme == "light" ? "gradient-bg" : "gradient-bg-dark"
                 } rounded-box z-50 mt-3 w-52 p-2 shadow`}
               >
-                <div className="">
-                  <li className="text-sm font-bold">{user?.displayName}</li>
-                </div>
+                <li className="text-sm font-bold my-5 px-1">
+                  {user?.displayName}
+                </li>
                 <li>
                   <button
                     onClick={handleSignOutUser}

@@ -5,19 +5,24 @@ import MyOrdersTableRow from "../components/MyOredersTableRow";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import Swal from "sweetalert2";
+import Loading from "../components/Loading";
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const axiosInstance = useAxios();
   const { user } = use(AuthContext);
   const { theme } = use(ThemeContext);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axiosInstance
       .get(`/order?email=${user?.email}`)
       .then((data) => {
         setMyOrders(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, [axiosInstance, user?.email]);
   console.log(myOrders);
@@ -87,13 +92,19 @@ const MyOrders = () => {
         </div>
 
         {myOrders.length < 1 ? (
-          <div
-            className={`${
-              theme == "light" ? "glass-blur" : "glass-blur-dark"
-            } py-6 text-center rounded-xl`}
-          >
-            <h2 className="text-2xl font-medium">You Don't have any orders!</h2>
-          </div>
+          loading ? (
+            <Loading />
+          ) : (
+            <div
+              className={`${
+                theme == "light" ? "glass-blur" : "glass-blur-dark"
+              } py-6 text-center rounded-xl`}
+            >
+              <h2 className="text-2xl font-medium">
+                You Don't have any orders!
+              </h2>
+            </div>
+          )
         ) : (
           <div className="w-full overflow-x-auto">
             <table className="w-full text-left">
