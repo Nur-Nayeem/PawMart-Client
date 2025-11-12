@@ -1,11 +1,10 @@
 import React, { Suspense } from "react";
 import HeroSlider from "../components/HeroSection/HeroSection";
-import CategorySection from "../components/CategorySection";
 import RecentListing from "../components/Listings/RecentListing";
 import WhyAdopt from "../components/WhyAdoptSection/WhyAdopt";
 import OurHeros from "../components/OurHerosSection/OurHeros";
-import Loading from "../components/Loading";
 import { motion, useScroll } from "motion/react";
+import CategorySection from "../components/CategorySection/CategorySection";
 
 const Home = () => {
   const { scrollYProgress } = useScroll();

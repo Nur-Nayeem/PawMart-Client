@@ -18,8 +18,6 @@ const PetsAndSupplies = () => {
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
-    console.log("call");
-
     setCategory("All");
     setLoading(true);
     let url = "/listings";

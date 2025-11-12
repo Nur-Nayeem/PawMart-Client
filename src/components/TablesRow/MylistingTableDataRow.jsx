@@ -2,7 +2,7 @@ import React from "react";
 import { MdDeleteOutline, MdModeEditOutline } from "react-icons/md";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MylistingTableDataRow = ({ row, setRefetch, refetch }) => {
   const navigate = useNavigate();

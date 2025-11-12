@@ -1,15 +1,15 @@
 import React, { use } from "react";
+import { MyContext, ThemeContext } from "../../Contexts/Contexts";
+import { useNavigate } from "react-router";
 import { MdOutlineHealthAndSafety, MdOutlineToys } from "react-icons/md";
 import { PiBowlFood, PiDog } from "react-icons/pi";
-import { Link, useNavigate } from "react-router";
-import { MyContext, ThemeContext } from "../Contexts/Contexts";
 
 const CategorySection = () => {
   const { theme } = use(ThemeContext);
   const { setCategory } = use(MyContext);
   const navigate = useNavigate();
   return (
-    <div className="my-10">
+    <div className="my-20">
       <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">
         Explore Our Category
       </h2>

@@ -19,7 +19,7 @@ const RecentListing = () => {
   }, [axiosInstanse, recentRefetch]);
 
   return (
-    <div className="px-2.5 sm:px-0 my-10">
+    <div className="px-2.5 sm:px-0 my-20">
       <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10">
         Recent Listings
       </h2>

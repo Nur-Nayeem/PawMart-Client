@@ -15,8 +15,8 @@ const OurHeros = () => {
           } p-6 flex flex-col items-center text-center`}
         >
           <img
-            alt="Happy adopter with a cat"
-            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white/50 shadow-md"
+            alt="Happy adopter with a dog"
+            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[#A0D2EB]/30 shadow-md"
             src="https://i.ibb.co.com/TBN4FCn1/rsz-3525.png"
           />
           <p className="dark:text-gray-200 text-gray-700 italic mb-4">
@@ -33,8 +33,8 @@ const OurHeros = () => {
           } p-6 flex flex-col items-center text-center`}
         >
           <img
-            alt="Happy adopter with a dog"
-            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white/50 shadow-md"
+            alt="Happy adopter with a cat"
+            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[#A0D2EB]/30 shadow-md"
             src="https://i.ibb.co.com/svQdjqmG/rsz-12147911439.png"
           />
           <p className="dark:text-gray-200 text-gray-700 italic mb-4">
@@ -51,8 +51,8 @@ const OurHeros = () => {
           } p-6 flex flex-col items-center text-center`}
         >
           <img
-            alt="Happy adopter with a puppy"
-            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white/50 shadow-md"
+            alt="Happy adopter with two puppy"
+            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[#A0D2EB]/30 shadow-md"
             src="https://i.ibb.co.com/4gRdKpm6/rsz-1marko.png"
           />
           <p className="dark:text-gray-200 text-gray-700 italic mb-4">
