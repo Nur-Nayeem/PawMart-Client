@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const OrderForm = () => {
   const { theme } = use(ThemeContext);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -17,8 +18,12 @@ const OrderForm = () => {
   useEffect(() => {
     axiosInstance
       .get(`/listings/${id}`)
-      .then((data) => setListing(data.data))
-      .catch((err) => console.log(err));
+      .then((data) => {
+        setListing(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [axiosInstance, id]);
 
   const onOrderFormSubmit = (e) => {
@@ -43,6 +48,7 @@ const OrderForm = () => {
       date,
       note,
     };
+    setLoading(true);
     axiosInstance
       .post("/order", orderFormObj)
       .then((data) => {
@@ -52,6 +58,7 @@ const OrderForm = () => {
             text: "Your Order is Successfully submitted",
             icon: "success",
           });
+          setLoading(false);
           navigate("/my-orders");
           e.target.reset();
         }
@@ -62,6 +69,7 @@ const OrderForm = () => {
           title: "Oops...",
           text: err,
         });
+        setLoading(false);
       });
   };
 
@@ -223,7 +231,11 @@ const OrderForm = () => {
               </div>
               <div className="mt-auto pt-6">
                 <button className="w-full btn-primary shadow-glow hover:scale-101 transition-transform duration-300 text-white py-3 px-4 rounded-lg font-bold cursor-pointer ">
-                  Submit Order
+                  {loading ? (
+                    <span className="loading loading-spinner loading-xl text-base-100"></span>
+                  ) : (
+                    <span>Submit</span>
+                  )}
                 </button>
               </div>
             </div>

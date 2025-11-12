@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import { AuthContext, MyContext, ThemeContext } from "../Contexts/Contexts";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -10,6 +10,8 @@ const AddListing = () => {
   const axiosISecurenstance = useAxiosSecure();
   const navigate = useNavigate();
   const [category, setCategory] = useState("");
+  const { recentRefetch, setRecentRefetch } = use(MyContext);
+  const [loading, setLoading] = useState(false);
   const handleAddListing = (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim();
@@ -30,17 +32,18 @@ const AddListing = () => {
       email,
       description,
     };
-    console.log(listingObject);
+    setLoading(true);
     axiosISecurenstance
       .post("/add-listing", listingObject)
       .then((data) => {
-        // console.log(data);
         if (data.data.insertedId) {
           Swal.fire({
             title: "Successfully added listing",
             icon: "success",
           });
+          setRecentRefetch(!recentRefetch);
           navigate("/my-listings");
+          setLoading(false);
           e.target.reset();
         }
       })
@@ -51,6 +54,7 @@ const AddListing = () => {
           title: "Oops...",
           text: err,
         });
+        setLoading(false);
       });
   };
 
@@ -179,7 +183,11 @@ const AddListing = () => {
               className="w-full btn-primary overflow-hidden rounded-full h-12 px-6 text-white font-bold leading-normal shadow-glow hover:scale-105 transition-transform duration-300 cursor-pointer"
               type="submit"
             >
-              Submit Listing
+              {loading ? (
+                <span className="loading loading-spinner loading-xl text-base-100"></span>
+              ) : (
+                <span>Create</span>
+              )}
             </button>
           </div>
         </form>

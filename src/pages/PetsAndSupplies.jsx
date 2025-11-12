@@ -2,14 +2,14 @@ import React, { use, useEffect, useState } from "react";
 import ListingCard from "../components/Listings/ListingCard";
 import useAxios from "../hooks/useAxios";
 import Loading from "../components/Loading";
-import { CetegoryContext, ThemeContext } from "../Contexts/Contexts";
+import { MyContext, ThemeContext } from "../Contexts/Contexts";
 import { useNavigate, useParams } from "react-router";
 import { motion, useScroll } from "motion/react";
 
 const PetsAndSupplies = () => {
   const axiosInstance = useAxios();
   const { theme } = use(ThemeContext);
-  const { category, setCategory } = use(CetegoryContext);
+  const { category, setCategory } = use(MyContext);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -141,7 +141,7 @@ const PetsAndSupplies = () => {
               <option>Pets</option>
               <option>Pet Food</option>
               <option>Accessories</option>
-              <option>Pet Care Products</option>
+              <option>Care Products</option>
             </select>
           </div>
         </div>

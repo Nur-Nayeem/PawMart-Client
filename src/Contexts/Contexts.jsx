@@ -4,4 +4,4 @@ export const AuthContext = createContext(null);
 
 export const ThemeContext = createContext(null);
 
-export const CetegoryContext = createContext(null);
+export const MyContext = createContext(null);

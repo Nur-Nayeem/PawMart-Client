@@ -2,11 +2,11 @@ import React, { use } from "react";
 import { MdOutlineHealthAndSafety, MdOutlineToys } from "react-icons/md";
 import { PiBowlFood, PiDog } from "react-icons/pi";
 import { Link, useNavigate } from "react-router";
-import { CetegoryContext, ThemeContext } from "../Contexts/Contexts";
+import { MyContext, ThemeContext } from "../Contexts/Contexts";
 
 const CategorySection = () => {
   const { theme } = use(ThemeContext);
-  const { setCategory } = use(CetegoryContext);
+  const { setCategory } = use(MyContext);
   const navigate = useNavigate();
   return (
     <div className="my-10">
@@ -80,8 +80,8 @@ const CategorySection = () => {
         </button>
         <button
           onClick={() => {
-            setCategory("Pet Care Products");
-            navigate("/category-filtered-product/Pet Care Products");
+            setCategory("Care Products");
+            navigate("/category-filtered-product/Care Products");
           }}
           className={`flex flex-1 gap-3 rounded-xl  ${
             theme == "light" ? "glass-blur" : "glass-blur-dark"

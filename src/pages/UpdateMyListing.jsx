@@ -12,6 +12,7 @@ const UpdateListing = () => {
   const axiosSecureInstance = useAxiosSecure();
   const [category, setCategory] = useState("");
   const [listing, setListing] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axiosSecureInstance
@@ -44,6 +45,7 @@ const UpdateListing = () => {
       date,
       description,
     };
+    setLoading(true);
     axiosSecureInstance
       .patch(`/update-listing/${id}`, updatelistingObject)
       .then(() => {
@@ -51,6 +53,7 @@ const UpdateListing = () => {
           title: "Successfully updated listing",
           icon: "success",
         });
+        setLoading(false);
         navigate("/my-listings");
         e.target.reset();
       })
@@ -61,6 +64,7 @@ const UpdateListing = () => {
           title: "Oops...",
           text: err,
         });
+        setLoading(false);
       });
   };
 
@@ -194,7 +198,11 @@ const UpdateListing = () => {
               className="w-full btn-primary overflow-hidden rounded-full h-12 px-6 text-white font-bold leading-normal shadow-glow hover:scale-105 transition-transform duration-300 cursor-pointer"
               type="submit"
             >
-              Submit Listing
+              {loading ? (
+                <span className="loading loading-spinner loading-xl text-base-100"></span>
+              ) : (
+                <span>Update Listing</span>
+              )}
             </button>
           </div>
         </form>

@@ -25,7 +25,6 @@ const MyListings = () => {
         setLoading(false);
       });
   }, [AxiosSecureInstance, user?.email, refetch]);
-  console.log(myListings);
 
   return (
     <section className="mt-12 grow">

@@ -1,18 +1,13 @@
-import React, { Suspense, use } from "react";
+import React, { Suspense } from "react";
 import HeroSlider from "../components/HeroSection/HeroSection";
 import CategorySection from "../components/CategorySection";
 import RecentListing from "../components/Listings/RecentListing";
 import WhyAdopt from "../components/WhyAdoptSection/WhyAdopt";
 import OurHeros from "../components/OurHerosSection/OurHeros";
-import axios from "axios";
 import Loading from "../components/Loading";
 import { motion, useScroll } from "motion/react";
-const recentListingPromise = axios
-  .get("https://paws-mart-server.vercel.app/recent-listings")
-  .then((data) => data.data);
 
 const Home = () => {
-  const recentListing = use(recentListingPromise);
   const { scrollYProgress } = useScroll();
   return (
     <>
@@ -33,9 +28,7 @@ const Home = () => {
       <div>
         <HeroSlider />
         <CategorySection />
-        <Suspense fallback={<Loading />}>
-          <RecentListing recentListing={recentListing} />
-        </Suspense>
+        <RecentListing />
         <WhyAdopt />
         <OurHeros />
       </div>
