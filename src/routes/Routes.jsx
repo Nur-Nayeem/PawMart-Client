@@ -4,7 +4,6 @@ import Home from "../pages/Home/Home";
 import PetsAndSupplies from "../pages/ListingsPage/PetsAndSupplies";
 import DetailsPage from "../pages/DetailsListingPage/DetailsPage";
 import AddListing from "../pages/AddListingPage/AddListing";
-import OrderForm from "../pages/OrderFormPage/OrderForm";
 import MyListings from "../pages/MyListingsPage/MyListings";
 import MyOrders from "../pages/MyOrdersPage/MyOrders";
 import UpdateListing from "../pages/UpadateListingPage/UpdateMyListing";
@@ -42,14 +41,6 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddListing />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "pet-and-supplies/order/:id",
-        element: (
-          <PrivateRoute>
-            <OrderForm />
           </PrivateRoute>
         ),
       },
