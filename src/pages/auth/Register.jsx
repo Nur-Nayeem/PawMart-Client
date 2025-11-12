@@ -1,29 +1,35 @@
 import React, { use, useState } from "react";
-import { CiLock, CiMail } from "react-icons/ci";
+import { CiLink, CiLock, CiMail } from "react-icons/ci";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import { IoPersonOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
 
-const Login = () => {
-  const { signWithGoogle, loginUser } = use(AuthContext);
+const Register = () => {
+  const { signWithGoogle, createUser, updateUserProfile } = use(AuthContext);
   const { theme } = use(ThemeContext);
   const [error, setError] = useState(false);
-  const [loadingLogin, setLoadingLogin] = useState(false);
+  const [loadingReg, setLoadingReg] = useState(false);
   const [eye, setEye] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
+    let photourl = e.target.photourl.value;
     const password = e.target.password.value;
 
     const upperCaseRegEx = /[A-Z]/;
 
     const LowerCaseRegEx = /[a-z]/;
 
+    if (name.length < 3) {
+      setError("Userame must have at least 3 latter");
+      return;
+    }
     if (password.length < 6) {
       setError("Password Length must be at least 6 character");
       return;
@@ -36,26 +42,38 @@ const Login = () => {
       setError("Must have an Uppercase letter in the password");
       return;
     }
-    setLoadingLogin(true);
 
-    loginUser(email, password)
+    setLoadingReg(true);
+    createUser(email, password)
       .then(() => {
-        navigate(location.state || "/");
-        e.target.reset();
-        setLoadingLogin(false);
-        Swal.fire({
-          title: "Login Succenfull",
-          icon: "success",
-          draggable: true,
-        });
+        updateUserProfile(name, photourl)
+          .then(() => {
+            navigate("/");
+            setLoadingReg(false);
+            Swal.fire({
+              title: "Registration Succenfull",
+              icon: "success",
+              draggable: true,
+            });
+            e.target.reset();
+          })
+          .catch((err) => {
+            setLoadingReg(false);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.message,
+            });
+          });
       })
-      .catch((err) => {
-        setError("Login Faild! Your Email or password is wrong.");
-        setLoadingLogin(false);
+      .catch((error) => {
+        console.log("Registration Faild! Try again later");
+        setError("Registration Faild! Try again later");
+        setLoadingReg(false);
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: err.message,
+          text: error.message,
         });
       });
     setError("");
@@ -80,10 +98,9 @@ const Login = () => {
         });
       });
   };
-
   return (
-    <div className="py-16 my-container flex items-center justify-center">
-      <title>PawsMart - LogIn</title>
+    <div className="my-container flex items-center justify-center">
+      <title>PawsMart - Register</title>
       <div
         className={`w-full max-w-lg ${
           theme == "light" ? "glass-blur" : "glass-blur-dark"
@@ -95,10 +112,25 @@ const Login = () => {
             <img src="/pawprint.png" alt="logo-icon" className="w-6 h-6" />
           </h1>
           <p className="text-lg dark:text-white text-secondary mt-2">
-            Welcome back! Please login to your account.
+            Create Your Account
           </p>
         </div>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+              Name
+            </label>
+            <div className="relative">
+              <IoPersonOutline className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                className="w-full h-12 pl-10 pr-4 rounded-lg border-2 border-primary/50  bg-gray-200/10 focus:outline-none"
+                placeholder="Your name"
+                type="text"
+                name="name"
+                required
+              />
+            </div>
+          </div>
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
               Email
@@ -111,6 +143,20 @@ const Login = () => {
                 type="email"
                 name="email"
                 required
+              />
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+              Photo URL
+            </label>
+            <div className="relative">
+              <CiLink className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                className="w-full h-12 pl-10 pr-4 rounded-lg border-2 border-primary/50  bg-gray-200/10 focus:outline-none"
+                placeholder="Enter your photo url"
+                type="text"
+                name="photourl"
               />
             </div>
           </div>
@@ -135,21 +181,13 @@ const Login = () => {
                 {eye ? <FaRegEye /> : <FaRegEyeSlash />}
               </span>
             </div>
-            <div className="text-right mt-2">
-              <Link
-                to=""
-                className="text-sm dark:text-white text-secondary hover:underline"
-              >
-                Forgot Password?
-              </Link>
-            </div>
           </div>
           <p className="text-sm text-rose-500 mb-2.5">{error}</p>
           <button className="w-full flex items-center justify-center rounded-full py-3 px-6 btn-primary hover:bg-primary transition-all duration-300 transform hover:scale-105 text-white font-semibold  text-lg  leading-normal shadow-lg cursor-pointer">
-            {loadingLogin ? (
+            {loadingReg ? (
               <span className="loading loading-spinner loading-xl text-base-100"></span>
             ) : (
-              <span>Login</span>
+              <span>Register</span>
             )}
           </button>
         </form>
@@ -172,12 +210,12 @@ const Login = () => {
 
         <div className="mt-4 text-center">
           <p className="dark:text-white text-secondary">
-            Don't have an account?
+            Already have an Account?
             <Link
-              to="/auth/register"
+              to="/auth/login"
               className="ml-1.5 font-medium gradient-text hover:underline"
             >
-              Register here
+              Login Here
             </Link>
           </p>
         </div>
@@ -186,4 +224,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

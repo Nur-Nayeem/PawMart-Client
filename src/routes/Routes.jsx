@@ -1,17 +1,17 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layoutes/MainLayout";
-import Home from "../pages/Home";
-import PetsAndSupplies from "../pages/PetsAndSupplies";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import AddListing from "../pages/AddListing";
-import DetailsPage from "../pages/DetailsPage";
-import OrderForm from "../pages/OrderForm";
-import MyListings from "../pages/MyListings";
-import UpdateListing from "../pages/UpdateMyListing";
-import MyOrders from "../pages/MyOrders";
+import Home from "../pages/Home/Home";
+import PetsAndSupplies from "../pages/ListingsPage/PetsAndSupplies";
+import DetailsPage from "../pages/DetailsListingPage/DetailsPage";
+import AddListing from "../pages/AddListingPage/AddListing";
+import OrderForm from "../pages/OrderFormPage/OrderForm";
+import MyListings from "../pages/MyListingsPage/MyListings";
+import MyOrders from "../pages/MyOrdersPage/MyOrders";
+import UpdateListing from "../pages/UpadateListingPage/UpdateMyListing";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
-import NotFoundPage from "../pages/NotFoundPage";
 export const router = createBrowserRouter([
   {
     path: "/",

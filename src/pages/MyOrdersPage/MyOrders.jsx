@@ -1,11 +1,11 @@
 import React, { use, useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
-import MyOrdersTableRow from "../components/MyOredersTableRow";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import Swal from "sweetalert2";
-import Loading from "../components/Loading";
+import useAxios from "../../hooks/useAxios";
+import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
+import MyOrdersTableRow from "../../components/TablesRow/MyOredersTableRow";
+import Loading from "../../components/Loading";
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const axiosInstance = useAxios();
@@ -25,7 +25,6 @@ const MyOrders = () => {
         setLoading(false);
       });
   }, [axiosInstance, user?.email]);
-  console.log(myOrders);
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();

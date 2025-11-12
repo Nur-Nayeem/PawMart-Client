@@ -1,9 +1,9 @@
 import React, { use, useEffect, useState } from "react";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
-import MylistingTableDataRow from "../components/MylistingTableDataRow";
 import { Link } from "react-router";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import Loading from "../components/Loading";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
+import Loading from "../../components/Loading";
+import MylistingTableDataRow from "../../components/TablesRow/MylistingTableDataRow";
 
 const MyListings = () => {
   const [myListings, setMyListings] = useState([]);

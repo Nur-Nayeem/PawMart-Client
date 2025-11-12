@@ -1,6 +1,6 @@
 import React, { use } from "react";
-import { ThemeContext } from "../Contexts/Contexts";
 import { Link } from "react-router";
+import { ThemeContext } from "../../Contexts/Contexts";
 
 const NotFoundPage = () => {
   const { theme } = use(ThemeContext);

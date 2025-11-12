@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from "react";
-import ListingCard from "../components/Listings/ListingCard";
-import useAxios from "../hooks/useAxios";
-import Loading from "../components/Loading";
-import { MyContext, ThemeContext } from "../Contexts/Contexts";
 import { useNavigate, useParams } from "react-router";
 import { motion, useScroll } from "motion/react";
+import useAxios from "../../hooks/useAxios";
+import { MyContext, ThemeContext } from "../../Contexts/Contexts";
+import Loading from "../../components/Loading";
+import ListingCard from "../../components/Listings/ListingCard";
 
 const PetsAndSupplies = () => {
   const axiosInstance = useAxios();

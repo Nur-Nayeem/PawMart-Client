@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { CiLocationOn, CiMail } from "react-icons/ci";
-import useAxios from "../hooks/useAxios";
 import { useNavigate, useParams } from "react-router";
 import { CgClose } from "react-icons/cg";
+import useAxios from "../../hooks/useAxios";
 
 const DetailsPage = () => {
   const axiosInstance = useAxios();

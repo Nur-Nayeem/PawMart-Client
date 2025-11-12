@@ -1,8 +1,8 @@
 import React, { use, useEffect, useState } from "react";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UpdateListing = () => {
   const { user } = use(AuthContext);
