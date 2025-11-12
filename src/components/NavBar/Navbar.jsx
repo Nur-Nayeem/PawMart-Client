@@ -1,23 +1,15 @@
-import React, { use, useEffect } from "react";
+import React, { use } from "react";
 import { IoLogOut, IoMenu } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
-import { AuthContext, ThemeContext } from "../Contexts/Contexts";
+import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
 import Swal from "sweetalert2";
 import { Typewriter } from "react-simple-typewriter";
+import ToggleTheme from "./ToggleTheme";
 
 const Navbar = () => {
   const { user, logOutUSer } = use(AuthContext);
-  const { theme, setTheme } = use(ThemeContext);
-  useEffect(() => {
-    const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark" : "light");
-  };
-
+  const { theme } = use(ThemeContext);
+  const imgUrl = user?.photoURL;
   const handleSignOutUser = () => {
     logOutUSer()
       .then(() => {
@@ -147,56 +139,9 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <div className="flex items-center gap-2.5">
-          <label className="toggle text-base-content">
-            <input
-              onChange={(e) => handleTheme(e.target.checked)}
-              type="checkbox"
-              defaultChecked={localStorage.getItem("theme") === "dark"}
-              className="theme-controller"
-            />
-
-            <svg
-              aria-label="sun"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="12" cy="12" r="4"></circle>
-                <path d="M12 2v2"></path>
-                <path d="M12 20v2"></path>
-                <path d="m4.93 4.93 1.41 1.41"></path>
-                <path d="m17.66 17.66 1.41 1.41"></path>
-                <path d="M2 12h2"></path>
-                <path d="M20 12h2"></path>
-                <path d="m6.34 17.66-1.41 1.41"></path>
-                <path d="m19.07 4.93-1.41 1.41"></path>
-              </g>
-            </svg>
-
-            <svg
-              aria-label="moon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-              </g>
-            </svg>
-          </label>
-
+        <div className="flex items-center gap-3">
+          {/* toggle night and light mode */}
+          <ToggleTheme />
           {user ? (
             <div className="dropdown dropdown-end z-50">
               <div
@@ -206,11 +151,11 @@ const Navbar = () => {
               >
                 <div className="w-9 border-2 border-gray-300 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
-                    src={user?.photoURL}
+                    src={imgUrl}
+                    alt="Profile"
                     onError={(e) => {
-                      e.target.onerror = null;
-                      e.currentTarget.src = "/avater.jpg";
+                      e.currentTarget.src = "/avatar.png";
+                      e.currentTarget.classList.add("scale-105");
                     }}
                   />
                 </div>

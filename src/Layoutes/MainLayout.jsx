@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { Outlet } from "react-router";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 import { ThemeContext } from "../Contexts/Contexts";
 
