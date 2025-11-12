@@ -31,7 +31,7 @@ const Navbar = () => {
     <div className={`${theme == "light" ? "glass-blur" : "glass-blur-dark"} `}>
       <div className="rounded-2xl flex justify-between items-center py-4 px-2.5 md:px-0 container mx-auto  ">
         <div className="flex justify-center items-center gap-2">
-          <div className="dropdown">
+          <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
               role="button"
