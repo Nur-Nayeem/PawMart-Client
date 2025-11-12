@@ -1,5 +1,3 @@
-<a href="https://pawsmart-79833.web.app">Live Link</a>
-
 # PawsMart 🐾
 
 **Live Site:** [[PawsMart Website](https://pawsmart-79833.web.app)]
@@ -31,22 +29,20 @@ PawsMart is a modern React-based marketplace for pets and pet-related products, 
 
   - **Dark and Light Mode** toggle for user comfort.
   - Built with **React**, **Tailwind CSS**, and **DaisyUI**.
-  - Smooth animations using **Framer Motion** and interactive carousels via **Swiper**.
+  - Smooth Scrolling animations using **Framer Motion** and interactive carousels via **Swiper**.
 
 - **Additional Features:**
-  - PDF reports generation with **jspdf-autotable**.
+  - PDF Order reports generation.
   - Beautiful alerts with **SweetAlert2**.
   - Dynamic effects with **React Icons** and **Typewriter** animations.
   - API calls handled seamlessly with **Axios**.
 
 ## Tech Stack
 
-- **Frontend:** React, Tailwind CSS, DaisyUI, React Icons, Swiper, Framer Motion, Typewriter
+- **Frontend:** React, Tailwind CSS, DaisyUI
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** Firebase Auth (Email/Password & Google)
-- **PDF Generation:** jsPDF + AutoTable
-- **Alerts:** SweetAlert2
 
 ## 📦 NPM Packages Used
 
@@ -54,13 +50,13 @@ PawsMart is a modern React-based marketplace for pets and pet-related products, 
 - daisyui
 - react-router
 - firebase
-- react-hot-toast
-- animate.css
 - swiper
-- react-spinners
+- framer motion
 - react-icons
 - axios
-- AOS
+- SweetAlert2
+- jspdf-autotable
+- Typewriter
 
 ## How to Run Locally
 
