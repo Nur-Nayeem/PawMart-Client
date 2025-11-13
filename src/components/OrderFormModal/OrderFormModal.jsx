@@ -210,7 +210,7 @@ const OrderFormModal = ({ modalRef, id, details }) => {
                       required
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col mb-3">
                     <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
                       Additional Notes
                     </label>
@@ -223,7 +223,7 @@ const OrderFormModal = ({ modalRef, id, details }) => {
                   </div>
                 </div>
                 <div className="mt-auto">
-                  <button className="w-full btn-primary shadow-glow hover:scale-101 transition-transform duration-300 text-white py-3 px-4 rounded-lg font-bold cursor-pointer ">
+                  <button className="w-full btn-primary shadow-glow hover:scale-101 transition-transform duration-300 text-white py-3 px-4 rounded-full font-bold cursor-pointer ">
                     {loading ? (
                       <span className="loading loading-spinner loading-xl text-base-100"></span>
                     ) : (
