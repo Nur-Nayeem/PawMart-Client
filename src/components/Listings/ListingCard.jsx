@@ -46,7 +46,7 @@ const ListingCard = ({ list }) => {
           <span>{location}</span>
         </div>
         <Link
-          to={`/pet-and-supplies/${_id}`}
+          to={`/category-filtered-product/pet-and-supplies/${_id}`}
           className="btn-primary py-2 px-4 text-center rounded-full font-bold cursor-pointer shadow-glow hover:scale-101 transition-transform duration-300 dark:text-white text-base-100 mt-auto"
         >
           See Details

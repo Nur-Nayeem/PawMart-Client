@@ -26,7 +26,7 @@ const UpdateListing = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [axiosInstance, id, listing.category, user?.email]);
+  }, [axiosInstance, id, listing.category]);
 
   const handleUpdateListing = (e) => {
     e.preventDefault();

@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         Component: PetsAndSupplies,
       },
       {
-        path: "pet-and-supplies/:id",
+        path: "category-filtered-product/pet-and-supplies/:id",
         element: (
           <PrivateRoute>
             <DetailsPage />
