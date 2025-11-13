@@ -61,178 +61,176 @@ const OrderFormModal = ({ modalRef, id, details }) => {
 
   return (
     <div>
-      <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box max-w-4xl">
-          <section className="flex justify-center">
-            <div
-              className={`w-full max-w-4xl rounded-xl ${
-                theme == "light" ? "glass-blur" : "glass-blur-dark"
-              }`}
-            >
-              <form
-                onSubmit={onOrderFormSubmit}
-                className="relative p-6 sm:p-8"
-              >
-                <div className="modal-action">
-                  <form method="dialog">
-                    <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors">
-                      <CgClose className="text-xl cursor-pointer" />
-                    </button>
-                  </form>
-                </div>
-
-                <div className="mb-6">
-                  <p className="dark:text-white text-secondary text-2xl sm:text-[32px] font-bold">
-                    Confirm Your Order
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12">
-                  <div className="flex flex-col">
-                    <div className="mb-6">
-                      <img
-                        alt="Golden Retriever Puppy"
-                        className="w-full h-auto object-cover rounded-lg aspect-4/3"
-                        src={details.image || "/fallback.png"}
-                        onError={(e) => {
-                          e.currentTarget.src = "/fallback.png";
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="flex flex-col sm:col-span-2">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Product Name
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          placeholder="name of the pet or supplies"
-                          type="text"
-                          readOnly
-                          defaultValue={details.name}
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Product ID
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          type="text"
-                          readOnly
-                          defaultValue={details._id}
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Price
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          type="text"
-                          readOnly
-                          defaultValue={details.price}
-                        />
-                      </div>
-                      <div className="flex flex-col sm:col-span-2">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Quantity
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          readOnly={details.category === "Pets"}
-                          type="number"
-                          name="quantity"
-                          defaultValue={1}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col mt-6 md:mt-0">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Buyer Name
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          type="text"
-                          readOnly
-                          defaultValue={user?.displayName}
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Email
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          type="email"
-                          readOnly
-                          defaultValue={user?.email}
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Shipping Address
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          placeholder="Enter your full address"
-                          name="address"
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Phone Number
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
-                          placeholder="(+880) 1456-7890"
-                          type="tel"
-                          name="phone"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Date (Pick Up)
-                        </label>
-                        <input
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
-                          type="date"
-                          name="date"
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-                          Additional Notes
-                        </label>
-                        <textarea
-                          className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none min-h-[100px]"
-                          placeholder="Any special instructions or questions?"
-                          rows="3"
-                          name="note"
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="mt-auto pt-6">
-                      <button className="w-full btn-primary shadow-glow hover:scale-101 transition-transform duration-300 text-white py-3 px-4 rounded-lg font-bold cursor-pointer ">
-                        {loading ? (
-                          <span className="loading loading-spinner loading-xl text-base-100"></span>
-                        ) : (
-                          <span>Submit</span>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
+      <dialog
+        ref={modalRef}
+        className={`modal modal-bottom sm:modal-middle ${
+          theme == "light" ? "gradient-bg" : "gradient-bg-dark"
+        }`}
+      >
+        <div
+          className={`modal-box w-full max-w-4xl rounded-xl ${
+            theme == "light" ? "glass-blur" : "glass-blur-dark"
+          }`}
+        >
+          <form onSubmit={onOrderFormSubmit} className="relative p-6 sm:p-8">
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors">
+                  <CgClose className="text-xl cursor-pointer" />
+                </button>
               </form>
             </div>
-          </section>
+
+            <div className="mb-6">
+              <p className="dark:text-white text-secondary text-2xl sm:text-[32px] font-bold">
+                Confirm Your Order
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12">
+              <div className="flex flex-col">
+                <div className="mb-6">
+                  <img
+                    alt="Golden Retriever Puppy"
+                    className="w-full h-auto object-cover rounded-lg aspect-4/3"
+                    src={details.image || "/fallback.png"}
+                    onError={(e) => {
+                      e.currentTarget.src = "/fallback.png";
+                    }}
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col sm:col-span-2">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Product Name
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      placeholder="name of the pet or supplies"
+                      type="text"
+                      readOnly
+                      defaultValue={details.name}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Product ID
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      type="text"
+                      readOnly
+                      defaultValue={details._id}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Price
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      type="text"
+                      readOnly
+                      defaultValue={details.price}
+                    />
+                  </div>
+                  <div className="flex flex-col sm:col-span-2">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Quantity
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      readOnly={details.category === "Pets"}
+                      type="number"
+                      name="quantity"
+                      defaultValue={1}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col mt-6 md:mt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Buyer Name
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      type="text"
+                      readOnly
+                      defaultValue={user?.displayName}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Email
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      type="email"
+                      readOnly
+                      defaultValue={user?.email}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Shipping Address
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      placeholder="Enter your full address"
+                      name="address"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Phone Number
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
+                      placeholder="(+880) 1456-7890"
+                      type="tel"
+                      name="phone"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Date (Pick Up)
+                    </label>
+                    <input
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none"
+                      type="date"
+                      name="date"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
+                      Additional Notes
+                    </label>
+                    <textarea
+                      className="w-full h-12 p-4 rounded-lg border-2 border-primary/50  bg-base-100/50 focus:outline-none min-h-[100px]"
+                      placeholder="Any special instructions or questions?"
+                      rows="3"
+                      name="note"
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="mt-auto">
+                  <button className="w-full btn-primary shadow-glow hover:scale-101 transition-transform duration-300 text-white py-3 px-4 rounded-lg font-bold cursor-pointer ">
+                    {loading ? (
+                      <span className="loading loading-spinner loading-xl text-base-100"></span>
+                    ) : (
+                      <span>Submit</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </dialog>
     </div>
