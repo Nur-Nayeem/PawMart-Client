@@ -54,6 +54,7 @@ PawMart is a modern React-based pet marketplace designed to make pet adoption ea
 
 ## 📦 NPM Packages Used
 
+Client:
 - tailwindcss
 - daisyui
 - react-router
@@ -65,6 +66,13 @@ PawMart is a modern React-based pet marketplace designed to make pet adoption ea
 - SweetAlert2
 - jspdf-autotable
 - Typewriter
+  
+Server:
+- cors
+- express
+- firebase-admin
+- mongodb
+- dotenv
 
 ---
 
