@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router";
 import { IoPersonOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
+import { imageUpload } from "../../lib";
 
 const Register = () => {
   const { signWithGoogle, createUser, updateUserProfile } = use(AuthContext);
@@ -19,8 +20,10 @@ const Register = () => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
-    let photourl = e.target.photourl.value;
+    let photo = e.target.image.files[0];
     const password = e.target.password.value;
+
+    const photourl = await imageUpload(photo);
 
     const upperCaseRegEx = /[A-Z]/;
 
@@ -146,18 +149,22 @@ const Register = () => {
               />
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
               Photo URL
             </label>
             <div className="relative">
-              <CiLink className="absolute left-3 top-1/2 -translate-y-1/2" />
               <input
-                className="w-full h-12 pl-10 pr-4 rounded-lg border-2 border-primary/50  bg-gray-200/10 focus:outline-none"
-                placeholder="Enter your photo url"
-                type="text"
-                name="photourl"
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                className="file-input w-full h-12 pr-4 rounded-lg border-2 border-primary/50  bg-gray-200/10 focus:outline-none"
               />
+              <p className="mt-1 text-xs text-gray-400">
+                PNG, JPG or JPEG (max 2MB)
+              </p>
             </div>
           </div>
           <div className="mb-6">
