@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { AuthContext, MyContext, ThemeContext } from "../../Contexts/Contexts";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { imageUpload } from "../../lib";
 
 const AddListing = () => {
   const { user } = use(AuthContext);
@@ -12,15 +13,18 @@ const AddListing = () => {
   const [category, setCategory] = useState("");
   const { recentRefetch, setRecentRefetch } = use(MyContext);
   const [loading, setLoading] = useState(false);
-  const handleAddListing = (e) => {
+  const handleAddListing = async (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim();
     const price = parseInt(e.target.price.value) || 0;
     const location = e.target.location.value.trim();
-    const image = e.target.photourl.value.trim();
+    const photo = e.target.image.files[0];
     const date = e.target.date.value.trim();
     const email = user?.email;
     const description = e.target.description.value.trim();
+    setLoading(true);
+
+    const image = await imageUpload(photo);
 
     const listingObject = {
       name,
@@ -32,7 +36,6 @@ const AddListing = () => {
       email,
       description,
     };
-    setLoading(true);
     axiosISecurenstance
       .post("/add-listing", listingObject)
       .then((data) => {
@@ -135,14 +138,26 @@ const AddListing = () => {
           </div>
           <div>
             <label className="block text-sm font-semibold mb-2 dark:text-white text-secondary">
-              Image (URL)
+              Product/Pet Photo
             </label>
-            <input
+            <div className="relative">
+              <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                className="file-input w-full h-12 pr-4 rounded-lg border-2 border-primary/50  bg-gray-200/10 focus:outline-none"
+              />
+              <p className="mt-1 text-xs text-gray-400">
+                PNG, JPG or JPEG (max 2MB)
+              </p>
+            </div>
+            {/* <input
               className="w-full h-12 p-4 rounded-lg border-2 border-primary/50 bg-base-100/50 focus:outline-none"
               placeholder="https://example.com/image.jpg"
               type="url"
               name="photourl"
-            />
+            /> */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
