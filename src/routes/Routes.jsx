@@ -12,6 +12,7 @@ import Register from "../pages/auth/Register";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
 import ForgetPassword from "../pages/auth/ForgetPassswordPage";
+import Profile from "../pages/Profile/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -66,6 +67,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpdateListing />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
           </PrivateRoute>
         ),
       },

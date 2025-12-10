@@ -17,7 +17,7 @@ const PetsAndSupplies = () => {
   const [totalPage, setTotalPage] = useState(0);
   const { categoryName } = useParams();
   const { scrollYProgress } = useScroll();
-  const limit = 6;
+  const limit = 8;
 
   useEffect(() => {
     let categoryQuery = category;
@@ -139,7 +139,7 @@ const PetsAndSupplies = () => {
           </div>
         ) : (
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
               {listings.map((list, index) => (
                 <ListingCard key={index} list={list} />
               ))}

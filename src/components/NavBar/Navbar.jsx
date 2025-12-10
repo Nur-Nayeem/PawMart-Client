@@ -5,6 +5,8 @@ import { AuthContext, ThemeContext } from "../../Contexts/Contexts";
 import Swal from "sweetalert2";
 import { Typewriter } from "react-simple-typewriter";
 import ToggleTheme from "./ToggleTheme";
+import { IoMdPerson } from "react-icons/io";
+import { MdLogout } from "react-icons/md";
 
 const Navbar = () => {
   const { user, logOutUSer } = use(AuthContext);
@@ -162,15 +164,26 @@ const Navbar = () => {
                   theme == "light" ? "gradient-bg" : "gradient-bg-dark"
                 } rounded-box z-50 mt-3 w-52 p-2 shadow`}
               >
-                <li className="text-sm font-bold my-5 px-1">
+                <li className="text-sm font-bold py-2 px-4">
                   {user?.displayName}
                 </li>
                 <li>
+                  <Link
+                    to="/profile"
+                    className="flex w-full items-center gap-3 px-4 py-2 text-sm  hover:bg-slate-500/50 hover:text-primary"
+                  >
+                    <IoMdPerson className="text-base" />
+                    <span>Profile</span>
+                  </Link>
+                </li>
+
+                <li>
                   <button
                     onClick={handleSignOutUser}
-                    className="btn btn-sm text-left py-2 btn-primary text-white rounded-2xl"
+                    className="flex w-full items-center gap-3 px-4 py-2 text-sm  hover:bg-slate-500/50 hover:text-primary"
                   >
-                    <IoLogOut className="text-sm" /> Logout
+                    <MdLogout className="text-base" />
+                    <span>Logout</span>
                   </button>
                 </li>
               </ul>
